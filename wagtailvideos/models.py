@@ -24,6 +24,8 @@ from wagtail.admin.models import get_object_usage
 from wagtail.models import CollectionMember, Orderable
 from wagtail.search import index
 from wagtail.search.queryset import SearchableQuerySetMixin
+from cloudinary_storage.storage import VideoMediaCloudinaryStorage
+from cloudinary_storage.validators import validate_video
 
 logger = logging.getLogger(__name__)
 
@@ -72,7 +74,8 @@ def get_upload_to(instance, filename):
 class AbstractVideo(CollectionMember, index.Indexed, models.Model):
     title = models.CharField(max_length=255, verbose_name=_('title'))
     file = models.FileField(
-        verbose_name=_('file'), upload_to=get_upload_to)
+        verbose_name=_('file'), upload_to=get_upload_to,storage=VideoMediaCloudinaryStorage(),
+                              validators=[validate_video])
     thumbnail = models.ImageField(upload_to=get_upload_to, null=True, blank=True)
     created_at = models.DateTimeField(verbose_name=_('created at'), auto_now_add=True, db_index=True)
     duration = models.DurationField(blank=True, null=True)
