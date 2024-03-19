@@ -9,7 +9,7 @@ from wagtail.admin import messages
 from wagtail.admin.auth import PermissionPolicyChecker
 from wagtail.admin.forms.search import SearchForm
 from wagtail.admin.models import popular_tags_for_model
-from wagtail.contrib.modeladmin.helpers import AdminURLHelper
+from wagtail_modeladmin.helpers import AdminURLHelper
 from wagtail.models import Collection
 from wagtail.search.backends import get_search_backends
 
